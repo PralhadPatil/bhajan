@@ -1,55 +1,24 @@
-  // Load the Google Transliteration API
+google.load("elements", "1", {
+    packages: "transliteration"
+  });
 
-  google.load("elements", "1", {
+function onLoad() {
+var options = {
+    sourceLanguage:
+        google.elements.transliteration.LanguageCode.ENGLISH,
+    destinationLanguage:
+        [google.elements.transliteration.LanguageCode.KANNADA],
+    shortcutKey: 'ctrl+g',
+    transliterationEnabled: true
+};
 
-        packages: "transliteration"
+// Create an instance on TransliterationControl with the required
+// options.
+var control =
+    new google.elements.transliteration.TransliterationControl(options);
 
-      });
-
-
-
-  function onLoad() {
-
-    var options = {
-
-      sourceLanguage: 'en',
-
-      destinationLanguage: ['ml', 'hi','kn','ta','te'],
-
-      shortcutKey: 'ctrl+m',
-
-      transliterationEnabled: true
-
-    };
-
-
-
-    // Create an instance on TransliterationControl with the required
-
-    // options.
-
-    var control =
-
-        new google.elements.transliteration.TransliterationControl(options);
-
-
-
-    // Enable transliteration in the textfields with the given ids.
-
-    var ids = [ "language" ];
-
-    control.makeTransliteratable(ids);
-
-
-
-    // Show the transliteration control which can be used to toggle between
-
-    // English and Hindi and also choose other destination language.
-
-    control.showControl('translControl');
-
-  }
-
-  google.setOnLoadCallback(onLoad);
-
-
+// Enable transliteration in the textbox with id
+// 'transliterateTextarea'.
+control.makeTransliteratable(['transliterateTextarea']);
+}
+google.setOnLoadCallback(onLoad);
